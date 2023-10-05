@@ -10,8 +10,8 @@ import "./Errors.sol";
 library PriceConverter {
     function getPriceOfUsd(AggregatorV3Interface priceFeed) internal view returns (uint256) {
         (, int256 answer, , , ) = priceFeed.latestRoundData();
-        // 1 USD = 1XXXXXXXX ETH
-        return uint256(answer * 1e10);
+        // 1643 USD = 1 ETH = 1e18 wei
+        return 1e18 * 10 ** priceFeed.decimals() / uint256(answer);
     }
 
     function usdToEth(uint256 usdAmount, AggregatorV3Interface priceFeed) internal view returns(uint256) {

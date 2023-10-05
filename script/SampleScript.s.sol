@@ -16,9 +16,11 @@ contract DeploySampleContract is Script {
     function run() external returns(SampleContract) {
         HelperConfig helperConfig = new HelperConfig();
         AggregatorV3Interface ethUsdPriceFeed = helperConfig.getActivePriceFeed();
-        //vm.startBroadcast();
+        
+        vm.startBroadcast();
         SampleContract mContract = new SampleContract(ethUsdPriceFeed);
-        //vm.stopBroadcast();
+        vm.stopBroadcast();
+        
         return mContract;
     }
 

@@ -13,8 +13,8 @@ contract HelperConfig is Script {
         AggregatorV3Interface priceFeed;
     }
     
-    uint8 public constant DECIMALS = 8;
-    int256 public constant INITIAL_PRICE = 1;
+    uint8 public constant DECIMALS = 6;
+    int256 public constant INITIAL_PRICE = 1234567;
 
     NetworkConfig public activeNetworkConfig;
 
@@ -54,9 +54,8 @@ contract HelperConfig is Script {
         if (address(activeNetworkConfig.priceFeed) != address(0)) {
             return activeNetworkConfig;
         }
-        //vm.startBroadcast();
+        
         MockV3Aggregator mockPriceFeed = new MockV3Aggregator(DECIMALS, INITIAL_PRICE);
-        //vm.stopBroadcast();
 
         NetworkConfig memory anvilConfig = NetworkConfig({
             priceFeed: AggregatorV3Interface(address(mockPriceFeed))
